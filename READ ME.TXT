@@ -1,0 +1,309 @@
+1)
+yarn create react-app your-app-name
+
+yarn create react-app ./
+
+2)add tailwing (tailwind config file iss added )
+yarn -D tailwindcss
+
+Follow-  https://tailwindcss.com/docs/guides/create-react-app
+yarn add --dev tailwindcss postcss autoprefixer
+
+
+3)App .js
+
+rfce => REact function export compoenet 
+rafc
+rafce
+
+import React from 'react'
+
+export const App = () => {
+  return (
+    <div>App</div>
+  )
+}
+
+
+4) index.js => 
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+
+
+5)index.css :  Add tailwind css to 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+6)Configure  react router  dom  for navigation
+
+-  lets add pacakge first :- 
+yarn add react-router-dom 
+
+- Read documanttaion first to see what pacvkages it offaers : BrowserRouter 
+wew will rap our full  app in this router 
+
+Go to index.js => 
+
+import {BrowserRouter as Router} from "react-router-dom"
+
+
+ <React.StrictMode>
+  <Router><App />
+  </Router>
+  </React.StrictMode>
+
+
+sO INTIALLY IT WILL LOAD APP.JS AS OUR HOME COMPONENT 
+
+
+7) in container folder index.css import 
+
+/*Google fonts Poppins */
+
+Terminal => yarn add react-icons
+and we will use its version => hi2
+import {HiChevronDoubleLeft} from "react-icons/hi2"
+
+8) in containet folder go for Home.jsx 
+*)Home page => Left container
+*)Home page => Right container
+*) useState to set  (Home-Left container) value false initially 
+const [isSideMenu, setisSideMenu] = useState(false)
+
+
+9) yarn add framer-motion
+for animations add
+
+import { motion } from "framer-motion";
+
+latter can be used with div by preficing it with motion 
+it has many prporties such as => whileTap etc...
+
+<motion.div whileTap={{scale: 0.9}} className=........>       </motion.div>
+
+10) Dynamic string literals  => `` 
+
+we can latter customize ac to input given by user  by moniting state.
+
+<div className={``}>
+
+
+
+12) FIREBASE 
+
+
+
+
+
+CodeRepLiveCodeEditor
+Project name
+
+Project ID
+codereplivecodeeditor
+
+
+https://firebase.google.com/docs/auth/web/google-signin
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCw5RejdiLVTYLaSguj8RiecSx2YMlUDcA",
+  authDomain: "codereplivecodeeditor.firebaseapp.com",
+  projectId: "codereplivecodeeditor",
+  storageBucket: "codereplivecodeeditor.appspot.com",
+  messagingSenderId: "350920038345",
+  appId: "1:350920038345:web:1f9cb8a5a0d145c92c3a18"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+
+
+Authentication   --> sign in with googel or sign in with redirect 
+*) Google 
+
+Public-facing name for project
+
+project-350920038345
+
+*) FIRE STORE DATABASE 
+
+Rules :
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+
+*) yarn add firebase 
+
+*) make config folder in SRC  ->  firebase.config.js
+in root folder  make => 
+
+*) make utils foldewr in src 
+
+*) use onclick in signUp .jsx to use authentication 
+this is return us to home page  so access them in APP.jsx 
+to get user autheticated based on authStatechnaged
+
+1:54:32
+
+
+13) Github 
+developert settings -> OAuth app
+http://localhost:3000/home
+give call back url from firebase=> https://codereplivecodeeditor.firebaseapp.com/__/auth/handler
+
+
+
+then you will get 
+Client ID
+751eb91d45c0d4ad4d5b
+Client secrets
+a1ba988b48ecea59067b312742327de737cda73b
+
+
+
+*) edit util file to provide github intrgration 
+
+
+14) Sign up button (createa  new user )
+
+firebase  docs => web =>password authentication 
+
+read a sync fubction and promise
+
+
+15) after succesfull authtication from google and github 
+we willl push the user to firebase Db + Redux Store 
+
+ go to docs => 
+https://firebase.google.com/docs/firestore/manage-data/add-data
+Set doc => we need to specify id of our document 
+ add Doc =>  firebase automatically generates id of doocument 
+ 
+So write setFunction in App.jsx as we have data of user at App.jsx
+
+1)Build -> firestore db 
+
+16) 
+ Loading icon Animation - Using spinner animation pacakage
+react loader spinner
+yarn add react-loader-spinner
+
+https://mhnpd.github.io/react-loader-spinner/docs/components/triangle
+In componets Createa a new file -> spinner.jsx
+
+17)  as icon loades animation and user authenticates and logges succefully   => we Push details to redux store
+then navigate user to home screen 
+ADD THIS 2 PACLKAGES : 
+
+yarn add redux react-redux
+
+WE CREATE A ACTION TO PERFPORM WHAT NEEDS TO BE TRIGGERED 
+AND REDUCEDR TO PERFORM THAT ACTION TO UPDATEV AND MANUPULATYES STATES 
+THEN MAINTAIN STATES IN COMMON  STORE.
+AND WE CAN SPREAD THAT STAES AS DATALAYER OVER TOP OF MAIN COMPONENT
+AND WE CAN SPREDA THAT STSE THROGHT ALL THE CHILD COMPOENETS  
+sO CHILD CAN ACESS STATES WHHEN NEEDED
+
+make context folder 
+
+
+
+GO tO INDEX.JS and use provider comeponet given by redux 
+
+import { Provider } from 'react-redux';
+
+so Wrapp it in provider  <Provider> tag as it will act as data provider for aour complete react app
+also provide store object store={Store} as it is data 
+ <React.StrictMode>
+ <Provider store={Store} >
+  <Router>
+  <App />
+  </Router>
+  </Provider>
+  </React.StrictMode>
+
+
+18) CONDITIONAL CONDTIN 
+
+user?.photoURL?<> IF USER HAS PHOTO url  DO THIS </> :<>IF USER DONT HAVE PHOTO URL DO THIS  </>
+
+
+19) uuid  : FOR MENUS IN USER SCREN (HELPERS.JS)
+yarn add uuid 
+import { v4 as uuidv4 } from 'uuid';
+
+20) spread (...) operator to pass all properties from the slideUpOut
+
+{user?.displayName ? user?.displayName:`${user?.email.split("@")[0]}`}
+
+if user object then display name(user?.displayName) then display it =>  user?.displayName else  get email first letters(${user?.email.split("@")[0]}) till @
+
+ so if user has logged in from google or github then it will not have Diaply name 
+
+21 ) coding editor 
+ react split pane package (for make partition resizable HTML , CSS , JS )
+yarn add react-split-pane
+
+we will use both horizontal And vertical 
+  make container => NewProject.jsx
+
+
+
+Used uiw/react code mirror package 
+
+https://www.npmjs.com/package/@uiw/react-codemirror
+
+yarn add @uiw/react-codemirror
+yarn add @codemirror/lang-javascript
+
+
+
+it has many theme as shown so it is UI freindly 
+
+https://uiwjs.github.io/react-codemirror/#/theme/home
+
+
+22) Note Reducer store me user state ka format is store in file 
+userAuthReducer.js
+
+where we use => case "SET_USER"
+
+
+
+
+
+
+Concept - data pass from 
+
+
+1)Redux store one he , 
+
